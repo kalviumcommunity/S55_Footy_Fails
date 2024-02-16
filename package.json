@@ -1,0 +1,12 @@
+{
+  "name": "footy-fails",
+  "version": "1.0.0",
+  "description": "Footy fails is made to walk you through the biggest transfer fails in football history",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Divyam",
+  "license": "ISC"
+}
