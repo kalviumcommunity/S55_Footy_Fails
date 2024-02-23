@@ -1,12 +1,37 @@
-const express = require('express')
+const express = require('express');
 const app = express();
+const dotenv = require('dotenv').config();
+const mongoose = require('mongoose');
+const connection = process.env.URI;
 
-app.get("/ping",(req,res)=>{
-    res.send('Hello')
-})
+let connectionStatus = 'disconnected';
 
-app.listen(3000, ()=>{
-    console.log('Port 3000')
+const startDatabase = async () => {
+    try {
+        await mongoose.connect(connection);
+        connectionStatus = "Congratulations the database has been connected!!";
+    } catch (err) {
+        console.error("Failed to connect to database");
+        connectionStatus = "Failed to connect to database";
+    }
+};
+
+const stopDatabase = async () => {
+    await mongoose.disconnect();
+    connectionStatus = "Database disconnected";
+};
+
+app.get('/', (req, res) => {
+    res.send(connectionStatus);
+});
+
+app.get("/ping", (req, res) => {
+    res.send('Hello');
+});
+
+app.listen(3000, () => {
+    startDatabase();
+    console.log('Port 3000');
 });
 
 module.exports = app;
