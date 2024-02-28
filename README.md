@@ -6,3 +6,5 @@
 - Database containing the biggest transfer flops.
 - Self-made API
 
+# Deployed link:
+https://footy-fails.netlify.app/
