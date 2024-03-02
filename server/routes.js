@@ -5,7 +5,7 @@ const {TestModel} = require('./schema.js')
 
 router.use(express.json());
 
-router.get('/get',async  (req, res) => {
+router.get('/',async  (req, res) => {
     const finalStatus = await getConnectionStatus()
     res.send(finalStatus)
  });

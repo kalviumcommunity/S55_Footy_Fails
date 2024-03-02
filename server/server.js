@@ -4,9 +4,7 @@ const {router} = require('./routes')
 
 const{startDatabase}=require('./db.js')
 
-app.get("/",(req,res)=>{
-    res.send("hello world")
-})
+
 
 app.use(router);
 
