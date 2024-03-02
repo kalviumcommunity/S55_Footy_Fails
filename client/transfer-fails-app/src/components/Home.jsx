@@ -2,6 +2,7 @@ import '../App.css'
 import logo from '../images/logo.png'
 import Player from './Player'
 
+
 function Home(){
     return( 
         <>
