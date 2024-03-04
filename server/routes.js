@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const {getConnectionStatus}=require('./db')
+const {TestModel} = require('./schema.js')
 
 router.use(express.json());
 
@@ -31,6 +32,16 @@ router.delete('/delete', async (req, res) => {
     res.send('Data deleted successfully');
 });
 
+router.get('/players',async(req,res)=>{
+    try{
+        const test = await TestModel.find({})
+        console.log(test)
+        res.send(test)
+    }catch(err){
+        console.log(err)
+    }
+})
 
 
-module.exports = router
+
+module.exports = {router}

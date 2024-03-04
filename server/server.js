@@ -1,18 +1,19 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-const app_routes = require('./routes')
+const cors = require('cors')
+const {router} = require('./routes')
 
-const{startDatabase}=require('./db')
-
-
-
-app.use('/', app_routes);
+const{startDatabase}=require('./db.js')
 
 
-app.listen(3000, () => {
+app.use(cors())
+
+app.use(router);
+
+
+app.listen(3200, () => {
     startDatabase();
-    console.log('Server running on port 3000');
+    console.log('Server running on port 3200');
     
 });
 

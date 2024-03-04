@@ -7,6 +7,7 @@ body{
   font-family: 'Oswald';
   /* background-color: #588157; */
   background-color: #45a945;
+ 
 }
 
 nav{
@@ -14,6 +15,7 @@ nav{
   background-color: black;
   display: flex;
   justify-content: space-between;
+  position: sticky;
 }
 #logo{
   height: 8vw;
@@ -38,10 +40,13 @@ a{
   width: 20vw;
   border: 2px solid black;
   height: 28vw;
-  margin-left: 40vw;
-  margin-top: 4vw;
+  margin-top: 2vw;
+  /* margin-left: 40vw; */
+  /* margin-top: 4vw; */
   background-color: #588157; 
   box-shadow: 4px 4px 8px black;
+  margin-left: 7vw;
+  
 }
 .contents{
   text-align: center;
@@ -52,8 +57,27 @@ a{
   box-shadow: 7px 7px 10px rgb(255, 6, 6);
 }
 
+#back{
+  width: max-content;
+}
 
+.displayOut{
+  display:grid;
+  grid-template-columns: repeat(3,1fr);
+  flex-direction: row;
+  column-gap: 2vw;
+  align-items: center;
+  justify-content: space-around;
 
+ 
+ }
+
+ footer{
+  text-align: center;
+  background-color: black;
+  color: white;
+  height: 3vw;
+ }
 
 /* #root {
   max-width: 1280px;

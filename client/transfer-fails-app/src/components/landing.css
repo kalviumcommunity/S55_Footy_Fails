@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Rubik&display=swap');
+
+
+.landing{
+    background-image: url('../images/bg.jpeg');
+    background-size: 100vw;
+    height: 103vh;
+    font-family: 'Oswald';
+}
+
+#title{
+    text-align: center;
+    font-size: 4.5vw;
+    margin-top: -1vw;
+    text-shadow: 4px 4px 8px rgb(255, 176, 189);
+}
+
+#enter{
+    margin-left: 43vw;
+    width: 12vw;
+    height: 4vw;
+    font-size: 1.6vw;
+    background-color: palevioletred;
+    font-weight: 700;
+    box-shadow: 4px 4px 6px rgb(255, 156, 173);
+}
+
+#enter:hover{
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    box-shadow: 4px 4px 8px black;
+}
