@@ -11,10 +11,12 @@ function Home(){
             <input type="text" id='search' />
             <a href="">About</a>
         </nav>
-        <div>
+        <div className='displayOut'>
         <Player/>
         </div>
-        
+        <footer>
+            <h3>&copy; FOOTY-FAILS 2024</h3>
+        </footer>
         </>
     )
 }

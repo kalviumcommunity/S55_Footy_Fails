@@ -11,7 +11,7 @@ function Player() {
     useEffect(()=>{
         const addData = async()=>{
             try{
-                const response = await axios.get('http://localhost:3200/players')
+                const response = await axios.get('https://db-xofs.onrender.com/players')
                 setPlayers(response.data)
             }catch(err){
                 console.log(err)
@@ -25,26 +25,31 @@ function Player() {
     },[players])
 
   return (
-    <>
+    players.map(player=>{
+      return(
+        <>
       <div className="container">
         <div className="player">
           <img
-            src={coutinho}
+            src={player.img}
             alt=""
             id="player-1"
-            height="170vw"
+            height="190vw"
             width="308vw"
           />
         </div>
         <div className="contents">
-          <h3>Name of the Player: Phillipe Coutinho</h3>
-          <h3>Transfer fee: £142 million</h3>
-          <h3>Year of transfer: 2014</h3>
-          <h3>Transferred from: Liverpool FC</h3>
-          <h3>Transferred to: FC Barcelona</h3>
+          <p>Name: {player.name}</p>
+          <p>Transfer fee: {player.transferFee}</p>
+          <p>Transfer year: {player.year}</p>
+          <p>Transfered from: {player.from}</p>
+          <p>Transfered to: {player.to}</p>
         </div>
       </div>
     </>
+      )
+    })
+    
   );
 }
 
