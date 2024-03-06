@@ -1,6 +1,7 @@
 import '../App.css'
 import logo from '../images/logo.png'
 import Player from './Player'
+import { Link } from 'react-router-dom'
 
 
 function Home(){
@@ -9,7 +10,12 @@ function Home(){
         <nav>
             <img src={logo} alt='logo' id='logo' />
             <input type="text" id='search' />
+            <Link to='/form'>
+            <a href="">Add Player</a>
+            </Link>
+            
             <a href="">About</a>
+            
         </nav>
         <div className='displayOut'>
         <Player/>

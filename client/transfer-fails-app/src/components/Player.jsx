@@ -9,15 +9,15 @@ function Player() {
   console.log('hello')
     const [players,setPlayers]= useState([])
     useEffect(()=>{
-        const addData = async()=>{
-            try{
-                const response = await axios.get('https://db-xofs.onrender.com/players')
-                setPlayers(response.data)
-            }catch(err){
-                console.log(err)
-            }
-        }
-        addData()
+      const addData = async()=>{
+          try{
+              const response = await axios.get('https://db-xofs.onrender.com/players')
+              setPlayers(response.data)
+          }catch(err){
+              console.log(err)
+          }
+      }
+      addData()
     },[])
 
     useEffect(()=>{
