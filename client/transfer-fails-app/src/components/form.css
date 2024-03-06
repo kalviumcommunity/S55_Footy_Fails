@@ -12,6 +12,7 @@
     box-shadow: 4px 5px 8px black;
 }
 
+
 input{
     height: 2vw;
     width: 18vw;
@@ -34,4 +35,11 @@ input{
 #submit{
     cursor: pointer;
     font-weight: 600;
+}
+#submit-1{
+    width: 6vw;
+    height: 3vw;
+    font-size: 1.2vw;
+    background-color: red;
+    color: black;
 }
