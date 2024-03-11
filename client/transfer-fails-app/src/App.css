@@ -16,7 +16,13 @@ nav{
   display: flex;
   justify-content: space-between;
   position: sticky;
+  font-size: 2vw;
 }
+#navcont{
+  margin-top: 2.5vw;
+  font-size: 2vw;
+}
+
 #logo{
   height: 8vw;
   margin-top: 0.1vw;
@@ -104,6 +110,59 @@ background-color: green;
 
  #delete{
   background-color: red;
+ }
+
+ .userForm{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  column-gap: 2vw;
+  row-gap: 1.2vw;
+  margin-top: 3vw;
+ }
+
+ .signupCont{
+    border: 2px solid black;
+    text-align: center;
+    height: 20vw;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vw;
+    font-size: 1.3vw;
+    background-color: grey;
+    box-shadow: 4px 5px 8px black;
+    margin-left: 34vw;
+    margin-top: 10vw;
+
+ }
+.loginCont{
+  border: 2px solid black;
+  text-align: center;
+  height: 20vw;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1vw;
+  font-size: 1.3vw;
+  background-color: grey;
+  box-shadow: 4px 5px 8px black;
+  margin-left: 34vw;
+  margin-top: 10vw;
+
+}
+ 
+
+ .userForm input{
+  height: 3vw;
+ }
+
+ #btn{
+  height: 3vw;
+  width: 6vw;
+  font-weight: 600;
+  background-color: rgb(255, 0, 111);
  }
 
 /* #root {
