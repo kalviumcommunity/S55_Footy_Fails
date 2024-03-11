@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router()
 const {getConnectionStatus}=require('./db')
 const {TestModel} = require('./schema.js')
+const Joi = require('joi')
+
+const newPlayerSchema = Joi.object({
+    name: Joi.string().required(),
+    transferFee: Joi.string().required(),
+    year: Joi.number().required(),
+    from: Joi.string().required(),
+    to: Joi.string().required(),
+    img: Joi.string().required()
+});
+
 
 router.use(express.json());
 
@@ -45,23 +56,24 @@ router.get('/players',async(req,res)=>{
 router.get('/getPlayers/:id', async (req, res) => {
     try {
         const id = req.params.id;
-        const response = await TestModel.find({_id:id}); 
-        console.log(response);
-        res.send(response);
+        const player = await TestModel.findById({_id:id});
+        if (!player) {
+            return res.status(404).json({ error: 'Player not found' });
+        }
+        console.log(player);
+        res.json(player);
     } catch (err) {
-        console.log(err);
-        res.send("erorr in fetching player details")
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 
-router.delete('/deletePlayers/:id',(req,res)=>{
-    const id = req.params.id
-    TestModel.findByIdAndDelete({_id:id})
-    .then(res=>res.json(res))
-    .catch(err=>res.json(err))
-})
-
 router.put('/updatePlayers/:id',(req,res)=>{
+    const{value,error} = newPlayerSchema.validate(req.body)
+    if(error){
+        res.send(error.details)
+        console.log(error)
+    }
     const id = req.params.id
     TestModel.findByIdAndUpdate({_id:id},{
         name:req.body.name,
@@ -75,15 +87,35 @@ router.put('/updatePlayers/:id',(req,res)=>{
     .catch(err=>res.json(err))
 })
 
-router.post('/insert',async(req,res)=>{
-    try{
-        const newData =  await TestModel.create(req.body)
-        res.send(req.body)
+
+
+router.delete('/deletePlayers/:id', (req, res) => {
+    const id = req.params.id;
+    TestModel.findByIdAndDelete(id)
+        .then(deletedPlayer => {
+            res.json(deletedPlayer);
+        })
+        .catch(err => {
+            res.status(500).json({ error: err.message });
+        });
+});
+
+
+
+router.post('/insert', async (req, res) => {
+    try {
+        const { error, value } = newPlayerSchema.validate(req.body);
+        if (error) {
+            console.log(error);
+            res.send(error.details);
+        }
+
+        const newData = await TestModel.create(value);
+        res.send(newData); 
+    } catch (err) {
+        console.error(err);
     }
-    catch(err){
-        console.error(err)
-    }
-})
+});
 
 
 
