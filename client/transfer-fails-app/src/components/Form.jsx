@@ -27,19 +27,45 @@ function AddPlayer() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(info);
-    axios
-      .post("https://db-xofs.onrender.com/insert", info)
-      .then((response) => {
-        console.log(response.data);
-        navigate("/home");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    const { name, transferFee, year, from, to, img } = info;
+    
+    // Check if any input field is empty
+    if (!name || !transferFee || !year || !from || !to || !img) {
+      // Show alert for each empty input field
+      if (!name) {
+        alert("Name field is required!");
+      }
+      if (!transferFee) {
+        alert("Transfer Fee field is required!");
+      }
+      if (!year) {
+        alert("Year field is required!");
+      }
+      if (!from) {
+        alert("From field is required!");
+      }
+      if (!to) {
+        alert("To field is required!");
+      }
+      if (!img) {
+        alert("Image URL field is required!");
+      }
+    } else {
+      // All input fields are filled, proceed with submission
+      axios
+        .post("https://db-xofs.onrender.com/insert", info)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/home");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   useEffect(() => {
+    // Check if all input fields are filled
     if (
       info.name !== "" &&
       info.transferFee !== "" &&
