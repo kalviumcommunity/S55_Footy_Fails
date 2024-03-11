@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./form.css";
-import { Link,useNavigate } from "react-router-dom";
-function AddPlayer() {
+import { useNavigate } from "react-router-dom";
 
-    const navigate = useNavigate()
+function AddPlayer() {
+  const navigate = useNavigate();
+
   const [info, setInfo] = useState({
     name: "",
     transferFee: "",
@@ -31,7 +32,7 @@ function AddPlayer() {
       .post("https://db-xofs.onrender.com/insert", info)
       .then((response) => {
         console.log(response.data);
-        navigate("/home")
+        navigate("/home");
       })
       .catch((err) => {
         console.error(err);
@@ -40,12 +41,12 @@ function AddPlayer() {
 
   useEffect(() => {
     if (
-      info.name != "" &&
-      info.transferFee != "" &&
-      info.year != 0 &&
-      info.from != "" &&
-      info.to != "" &&
-      info.img != ""
+      info.name !== "" &&
+      info.transferFee !== "" &&
+      info.year !== 0 &&
+      info.from !== "" &&
+      info.to !== "" &&
+      info.img !== ""
     ) {
       setIsFilled(true);
     }
@@ -70,7 +71,7 @@ function AddPlayer() {
             <br />
             <input
               type="text"
-              value={info.fee}
+              value={info.transferFee}
               onChange={handleChange}
               name="transferFee"
             />
@@ -110,15 +111,13 @@ function AddPlayer() {
             <br />
             <input
               type="text"
-              value={info.url}
+              value={info.img}
               onChange={handleChange}
               name="img"
             />
           </div>
           <div>
-              <button id="submit" type="submit">
-                <Link to="/home">Submit</Link>
-              </button>
+            <button id="submit" type="submit">Submit</button>
           </div>
         </form>
       </div>

@@ -42,6 +42,39 @@ router.get('/players',async(req,res)=>{
     }
 })
 
+router.get('/getPlayers/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const response = await TestModel.find({_id:id}); 
+        console.log(response);
+        res.send(response);
+    } catch (err) {
+        console.log(err);
+        res.send("erorr in fetching player details")
+    }
+});
+
+router.delete('/deletePlayers/:id',(req,res)=>{
+    const id = req.params.id
+    TestModel.findByIdAndDelete({_id:id})
+    .then(res=>res.json(res))
+    .catch(err=>res.json(err))
+})
+
+router.put('/updatePlayers/:id',(req,res)=>{
+    const id = req.params.id
+    TestModel.findByIdAndUpdate({_id:id},{
+        name:req.body.name,
+        transferFee : req.body.transferFee,
+        year : req.body.year,
+        from : req.body.from,
+        to : req.body.to,
+        img : req.body.to
+    })
+    .then(res=>res.json(res))
+    .catch(err=>res.json(err))
+})
+
 router.post('/insert',async(req,res)=>{
     try{
         const newData =  await TestModel.create(req.body)

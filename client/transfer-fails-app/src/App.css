@@ -39,7 +39,7 @@ a{
 .container{
   width: 20vw;
   border: 2px solid black;
-  height: 28vw;
+  height: 30vw;
   margin-top: 2vw;
   /* margin-left: 40vw; */
   /* margin-top: 4vw; */
@@ -72,11 +72,38 @@ a{
  
  }
 
+ .buttons{
+  display: flex;
+  justify-content: center;
+  column-gap: 1vw;
+ }
+
  footer{
   text-align: center;
   background-color: black;
   color: white;
   height: 3vw;
+ }
+
+ .but{
+  height: 2vw;
+  font-weight: bold;
+  color: white;
+ 
+ }
+
+ .but:hover{
+  box-shadow: 2px 3px 3px black;
+  cursor: pointer;
+ }
+
+ #update{
+  position: relative;
+background-color: green;
+ }
+
+ #delete{
+  background-color: red;
  }
 
 /* #root {
