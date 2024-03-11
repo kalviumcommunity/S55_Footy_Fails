@@ -1,6 +1,5 @@
 import { useEffect,useState } from "react";
 import "../App.css";
-import coutinho from '../images/COUTINHO.jpg'
 import axios from 'axios'
 import { Link ,useNavigate} from "react-router-dom";
 
@@ -30,7 +29,10 @@ function Player() {
 
     const handleDelete = (id)=>{
         axios.delete('https://db-xofs.onrender.com/deletePlayers/'+id)
-        .then(res=>console.log(res))
+        .then(res=>{
+          console.log(res)
+          window.location.reload()
+        })
         .catch(err=>console.log(err))
     }
 
