@@ -34,11 +34,7 @@ function Login() {
             setCookie('username',username,365)
             setCookie('password',password,365)
             sessionStorage.setItem('login',true)
-            console.log(sessionStorage)
-            console.log(document.cookie)
             alert('login succesful')
-            console.log(username);
-            console.log(password);
             navigate("/home");
         }
         else{
