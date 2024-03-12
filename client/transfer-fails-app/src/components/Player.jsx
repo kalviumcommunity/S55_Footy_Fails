@@ -1,53 +1,43 @@
-import { useEffect,useState } from "react";
-import "../App.css";
-import axios from 'axios'
-import { Link ,useNavigate} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
+function Player({ selectedUser }) {
+  const navigate = useNavigate();
+  const [players, setPlayers] = useState([]);
 
-
-
-function Player() {
-  const navigate = useNavigate()
-  console.log('hello')
-    const [players,setPlayers]= useState([])
-    useEffect(()=>{
-      const addData = async()=>{
-          try{
-              const response = await axios.get('https://db-xofs.onrender.com/Players')
-              setPlayers(response.data)
-          }catch(err){
-              console.log(err)
-          }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://db-xofs.onrender.com/Players');
+        setPlayers(response.data);
+      } catch (err) {
+        console.log(err);
       }
-      addData()
-      
-    },[])
+    };
+    fetchData();
+  }, []);
 
-    useEffect(()=>{
-        console.log('players',players)
-    },[players])
+  const handleDelete = (id) => {
+    axios.delete(`https://db-xofs.onrender.com/deletePlayers/${id}`)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  }
 
-    const handleDelete = (id)=>{
-        axios.delete('https://db-xofs.onrender.com/deletePlayers/'+id)
-        .then(res=>{
-          console.log(res)
-          window.location.reload()
-        })
-        .catch(err=>console.log(err))
-    }
+  const filteredPlayers = selectedUser === 'All' ? players : players.filter(player => player.created_by === selectedUser);
 
   return (
-    players.map(player=>{
-      return(
-        <>
-      <div className="container">
+    filteredPlayers.map(player => (
+      <div className="container" key={player._id}>
         <div className="player">
           <img
             src={player.img}
             alt=""
             id="player-1"
             height="190vw"
-            width="308vw"
+            width="100%"
           />
         </div>
         <div className="contents">
@@ -58,18 +48,11 @@ function Player() {
           <p>Transfered to: {player.to}</p>
         </div>
         <div className="buttons">
-
-          
-          <button id="update" className="but" onClick={()=>navigate(`/update/${player._id}`)}>UPDATE</button>
-        
-          
-          <button id="delete" className="but" onClick={(e)=>{handleDelete(player._id)}}>DELETE</button>
+          <button id="update" className="but" onClick={() => navigate(`/update/${player._id}`)}>UPDATE</button>
+          <button id="delete" className="but" onClick={() => handleDelete(player._id)}>DELETE</button>
         </div>
       </div>
-    </>
-      )
-    })
-    
+    ))
   );
 }
 

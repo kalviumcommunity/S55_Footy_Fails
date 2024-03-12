@@ -13,9 +13,14 @@ function AddPlayer() {
     from: "",
     to: "",
     img: "",
+    created_by:`${sessionStorage.getItem('username')}`
   });
 
   const [isFilled, setIsFilled] = useState(false);
+
+  useEffect(() => {
+    
+  }, []);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,9 +34,9 @@ function AddPlayer() {
     event.preventDefault();
     const { name, transferFee, year, from, to, img } = info;
     
-    // Check if any input field is empty
+   
     if (!name || !transferFee || !year || !from || !to || !img) {
-      // Show alert for each empty input field
+
       if (!name) {
         alert("Name field is required!");
       }
@@ -51,12 +56,27 @@ function AddPlayer() {
         alert("Image URL field is required!");
       }
     } else {
-      // All input fields are filled, proceed with submission
+
+      // const createdBy = sessionStorage.getItem('username');
+    // setInfo((prevInfo) => ({
+    //   ...prevInfo,
+    //   "created_by": createdBy,
+    // }));
+      
       axios
-        .post("https://db-xofs.onrender.com/insert", info)
+        .post("https://db-xofs.onrender.com/insert", {
+          "name" : info.name,
+          "transferFee" : info.transferFee,
+          "year":info.year,
+          "from":info.from,
+          "to":info.to,
+          "img":info.img,
+          "created_by":info.created_by
+        })
         .then((response) => {
           console.log(response.data);
           navigate("/home");
+          console.log(info)
         })
         .catch((err) => {
           console.error(err);
@@ -65,7 +85,7 @@ function AddPlayer() {
   };
 
   useEffect(() => {
-    // Check if all input fields are filled
+    
     if (
       info.name !== "" &&
       info.transferFee !== "" &&
