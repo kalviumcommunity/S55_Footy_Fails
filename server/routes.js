@@ -5,6 +5,11 @@ const {TestModel} = require('./schema.js')
 const {UserModel} = require('./userSchema.js')
 const Joi = require('joi')
 
+require('dotenv').config()
+
+const jwt = require('jsonwebtoken')
+
+
 const newPlayerSchema = Joi.object({
     name: Joi.string().required(),
     transferFee: Joi.string().required(),
@@ -82,7 +87,7 @@ router.put('/updatePlayers/:id',(req,res)=>{
         year : req.body.year,
         from : req.body.from,
         to : req.body.to,
-        img : req.body.to
+        img : req.body.img
     })
     .then(res=>res.json(res))
     .catch(err=>res.json(err))
@@ -153,6 +158,22 @@ router.post('/logout',(req,res)=>{
     res.clearCookie('password')
 
     res.status(200).json({message:'Logout succesful'})
+})
+
+
+router.post('/auth', async(req,res) => {
+    try{const {username,password} = req.body
+    const user = {
+        "username" : username,
+        "password" : password
+    }
+    const ACCESS_TOKEN = jwt.sign(user,process.env.ACCESS_TOKEN)
+    res.cookie('token',ACCESS_TOKEN,{maxAge:365*24*60*60*1000})
+    res.json({"acsessToken" : ACCESS_TOKEN})
+}catch(err){
+    console.error(err)
+    res.status(500).json({error:'Internal Server Error'})
+}
 })
 
 
