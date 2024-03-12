@@ -34,16 +34,16 @@ function Login() {
             setCookie('username',username,365)
             setCookie('password',password,365)
             sessionStorage.setItem('login',true)
-            console.log(sessionStorage)
-            console.log(document.cookie)
+            sessionStorage.setItem('username',username)
             alert('login succesful')
-            console.log(username);
-            console.log(password);
             navigate("/home");
         }
-        else{
+       else if(response.status ===  401){
             alert('invalid user credentials')
-        }
+            console.log(Error)
+          }
+            
+        
        
       }
     } catch (err) {
