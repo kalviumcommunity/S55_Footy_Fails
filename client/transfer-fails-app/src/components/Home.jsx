@@ -62,7 +62,6 @@ function Home() {
               <Link to='/signup'>Sign-up</Link>
             </>
           )}
-          <Link to='/about'>About</Link>
         
       </nav>
       <div className="displayOut">
